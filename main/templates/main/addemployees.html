@@ -1,0 +1,21 @@
+<!doctype html>
+{% extends 'main/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <h1>Add employees</h1>
+    
+    <form method="POST" class="form-group">
+        {% csrf_token %}
+        {{user_form|crispy}}
+        {{extended_form|crispy}}
+        {{emp_form|crispy}}
+        <button type="submit" class="btn btn-success">Add employee</button>
+    </form>
+
+    {% if submitted %}
+        Employee added
+    
+
+    {% endif %}
+{% endblock %}

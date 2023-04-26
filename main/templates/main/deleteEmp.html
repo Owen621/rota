@@ -1,0 +1,23 @@
+<!doctype html>
+{% extends 'main/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<style>
+    form{
+        text-align: center;
+        margin: auto;
+    }
+</style>
+<br>
+<br>
+    <h1>Delete: {{employee.first_name}} {{employee.last_name}}</h1><br>
+    <div class="form">
+        <form action="{% url 'deleteEmp' employee.pk %}" method="post" id="deleteEmployee">
+            {% csrf_token %}
+            <button type="submit" name="deleteEmployee" value="deleted" class="btn btn-primary">Delete</button>
+
+        </form>
+    </div>
+
+{% endblock %}

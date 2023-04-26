@@ -1,0 +1,153 @@
+<!doctype html>
+<html>
+
+<style>
+
+    tr:nth-child(even) {
+        background-color: lightgreen;
+    }
+
+    tr:nth-child(odd) {
+        background-color: white;
+    }
+
+    #buttons {
+        text-align: center;
+    }
+</style>
+
+{% extends 'main/base.html' %}
+{% load custom_tags %}
+
+
+{% block content %}
+
+    
+    
+    {% if none == True %}
+    <br><br><br>
+        <h3>You haven't added any employees</h3>
+        <h3>Click<a href = "/addemployees"> here </a>to add some</h3>
+    {% else %}
+
+
+    
+ 
+        <br><br>
+        <table align="center" border="black" width="1200">
+            <tr align="center" style="background-color:lightgrey;">
+                <th width="150" height="50">Name</th>
+                <th width="100" height="50">Role</th>
+                <th width="100" height="50">Monday</th>
+                <th width="100" height="50">Tuesday</th>
+                <th width="100" height="50">Wednesday</th>
+                <th width="100" height="50">Thursday</th>
+                <th width="100" height="50">Friday</th>
+                <th width="100" height="50">Saturday</th>
+                <th width="100" height="50">Sunday</th>
+            </tr>
+            
+            {% if company.companyCheck %}
+                {% for employee in employees %}
+                    <tr align="center">
+                        <td height="50">{{employee.first_name}} {{employee.last_name}}</td>
+                        <td height="50">{{employee.role}}</td>
+
+                        <td height="50">{{employee.monday}}</td>
+                        <td height="50">{{employee.tuesday}}</td>
+                        <td height="50">{{employee.wednesday}}</td>
+                        <td height="50">{{employee.thursday}}</td>
+                        <td height="50">{{employee.friday}}</td>
+                        <td height="50">{{employee.saturday}}</td>
+                        <td height="50">{{employee.sunday}}</td>
+
+                {% endfor %}
+            
+            
+            
+            
+            {% elif generate %}
+            
+                {% for employee in employees %}
+                    {% with days=employee.generate %}
+                        
+                        {% tagsave employee days %}
+                        <tr align="center">
+                            <td height="50">{{employee.first_name}} {{employee.last_name}}</td>
+                            <td height="50">{{employee.role}}</td> 
+                                <td height="50">{{days.0}}</td>
+                                <td height="50">{{days.1}}</td>
+                                <td height="50">{{days.2}}</td>
+                                <td height="50">{{days.3}}</td>
+                                <td height="50">{{days.4}}</td>
+                                <td height="50">{{days.5}}</td>
+                                <td height="50">{{days.6}}</td>
+                        </tr> 
+            
+                    {% endwith %}
+                {% endfor %}
+
+            {% elif publish %}
+                {% for employee in employees %}
+                    
+                    <tr align="center">
+                        <td height="50">{{employee.first_name}} {{employee.last_name}}</td>
+                        <td height="50">{{employee.role}}</td>
+                        <td height="50">{{employee.monday}}</td>
+                        <td height="50">{{employee.tuesday}}</td>
+                        <td height="50">{{employee.wednesday}}</td>
+                        <td height="50">{{employee.thursday}}</td>
+                        <td height="50">{{employee.friday}}</td>
+                        <td height="50">{{employee.saturday}}</td>
+                        <td height="50">{{employee.sunday}}</td>
+
+                {% endfor %}
+                
+
+            {% else %}
+                
+                {% for employee in employees %}
+                    <tr align="center">
+                    <td height="50">{{employee.first_name}} {{employee.last_name}}</td>
+                    <td height="50">{{employee.role}}</td>
+                    <td height="50"></td>
+                    <td height="50"></td>
+                    <td height="50"></td>
+                    <td height="50"></td>
+                    <td height="50"></td>
+                    <td height="50"></td>
+                    <td height="50"></td>
+
+                {% endfor %}
+                
+                        
+                    
+                        
+            {% endif %}
+            
+        </table>
+        <br>
+        <div id="buttons">
+            {% if company.rotaSaved == 0 %}
+                <form action="/generate/" method="post" id="generateForm">
+                    {% csrf_token %}
+                    <button type="submit" name="generate" value="generated" class="btn btn-primary">Generate</button>
+                </form>
+            
+                <br>
+
+                {% if generate %}  
+                    <form action="/generate/" method="post" id="publishForm">
+                        {% csrf_token %}
+                        <button type="submit" name="publish" value="published" class="btn btn-primary">Publish</button>
+
+                    </form>
+                {% endif %}
+                    
+            {% endif %}
+        </div>
+        
+    {% endif %}
+    
+{% endblock %}
+</html>

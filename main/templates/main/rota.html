@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+
+<style>
+
+    tr:nth-child(even) {
+        background-color: lightgreen;
+    }
+
+    tr:nth-child(odd) {
+        background-color: white;
+    }
+
+    h3 {
+        text-align: center;
+        margin: auto;
+    }
+
+
+</style>
+
+
+{% extends 'main/base.html' %}
+{% block content %}
+    <h1>Hello, {{empuser.first_name}} {{empuser.last_name}}</h1>
+    {% if company.companyCheck %}
+        
+        <br><br>
+        
+        <div>
+            <table align="center" border="black" width="1200">
+                <tr align="center" style="background-color:lightgrey;">
+                    <th width="150" height="50">Name</th>
+                    <th width="100" height="50">Role</th>
+                    <th width="100" height="50">Monday</th>
+                    <th width="100" height="50">Tuesday</th>
+                    <th width="100" height="50">Wednesday</th>
+                    <th width="100" height="50">Thursday</th>
+                    <th width="100" height="50">Friday</th>
+                    <th width="100" height="50">Saturday</th>
+                    <th width="100" height="50">Sunday</th>
+                </tr>
+            
+         
+                {% for employee in employees %}
+                    <tr align="center">
+                        <td height="50">{{employee.first_name}} {{employee.last_name}}  </td>
+                        <td height="50">{{employee.role}}</td>
+
+                        <td height="50">{{employee.monday}}</td>
+                        <td height="50">{{employee.tuesday}}</td>
+                        <td height="50">{{employee.wednesday}}</td>
+                        <td height="50">{{employee.thursday}}</td>
+                        <td height="50">{{employee.friday}}</td>
+                        <td height="50">{{employee.saturday}}</td>
+                        <td height="50">{{employee.sunday}}</td>
+
+                {% endfor %}
+        </div>   
+
+
+    {% else %}
+        <br>
+        <h1>No published rota</h1>
+    {% endif %}
+        
+
+
+
+
+{% endblock %}
+</html>

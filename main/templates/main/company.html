@@ -1,0 +1,42 @@
+{% extends "main/base.html" %}
+
+
+
+{% load crispy_forms_tags %}
+
+    
+{% block content %}
+<!DOCTYPE html>
+<html>
+    
+<style>
+	.comp {
+		text-align: center;
+        margin: auto;
+	}
+	
+</style>
+
+<head>
+	<title>Company</title>
+</head>
+	<br>
+	<div class="comp">
+		<h1>Company information for {{company.company_name}}</h1>
+		<br><br><br>
+		<form action="" method="POST">
+			<h4>Update company information:</h4>
+			<br>
+			{% csrf_token %}
+			{{ form|crispy }}
+			<input type="submit" value="Update" class="btn btn-secondary">
+		<br>
+		<br>
+
+	</div>
+
+
+</html>
+
+
+{% endblock %}

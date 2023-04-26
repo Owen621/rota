@@ -1,0 +1,139 @@
+{% extends "main/base.html" %}
+
+
+
+{% load crispy_forms_tags %}
+
+    
+{% block content %}
+<!DOCTYPE html>
+<html>
+    
+
+<style>
+    h5, h6 {    
+        text-align: center;
+        margin: auto;
+    }
+
+    ul {
+        list-style-position: inside;
+        list-style-type: none;
+        text-align: center;
+        padding: 0;
+        margin: 0;
+    }
+
+    .costs-col{
+        flex-basis: 31%;
+        background: #d6e0dd;
+        border-radius: 5px;
+        margin-bottom: 1%;
+        padding: 2px 2px;
+        box-sizing: border-box;
+	}
+
+	
+	p{
+        color:rgb(0, 0, 0);
+        font-size: 14px;
+        font-weight: 300;
+        line-height: 22px;
+        padding: 10px;
+		text-align: center;
+        margin: auto;
+    }
+
+    .emp{
+        display: inline-block;
+        width: 33%
+    }
+
+</style>
+
+<head>
+	<title>Company</title>
+</head>
+	<br>
+    {% if employees %}
+        <h1>{{company.company_name}} employees:</h1>
+        <br><br><br>
+
+        {% for employee in employees %}
+        <div class="emp">
+            <h5>{{employee.first_name}} {{employee.last_name}}  </h5>
+            <ul>
+                <li>Date of birth: {{employee.birth_date}}</li>
+                <li>Role: {{employee.role}}</li>
+                <li>Hours per week: {{employee.hours_per_week}}</li>
+                <li>Hourly wage: £{{employee.hourly_pay}}</li>
+            </ul>
+            <h6><a href="{% url 'updateInfo' employee.pk %}">Update information</a></h6>
+            <h6><a href="{% url 'deleteEmp' employee.pk %}">Delete employee</a></h6>
+            <br>
+        </div>
+        {% endfor %}
+
+        <div class="costs-col">
+            <p>Monday costs:
+                £{{mon}}0
+            </p>
+        </div>
+    
+        <div class="costs-col">
+            <p>Tuesday costs:
+                £{{tue}}0
+            </p>
+        </div>
+    
+        <div class="costs-col">
+            <p>Wednesday costs:
+                £{{wed}}0
+            </p>
+        </div>
+    
+        <div class="costs-col">
+            <p>Thursday costs:
+                £{{thu}}0
+            </p>
+        </div>
+    
+        <div class="costs-col">
+            <p>Friday costs:
+                £{{fri}}0
+            </p>
+        </div>
+    
+        <div class="costs-col">
+            <p>Saturday costs:
+                £{{sat}}0
+            </p>
+        </div>
+    
+        <div class="costs-col">
+            <p>Sunday costs:
+                £{{sun}}0
+            </p>
+        </div>
+    
+        <div class="costs-col">
+            <p>Total costs:
+                £{{total}}0
+            </p>
+        </div>
+    
+
+    {% else %}
+        
+    <h5>No employees click <a href="/addemployees">here</a> to add some</h5>
+    
+    {% endif %}
+
+
+
+
+
+</html>
+
+
+{% endblock %}

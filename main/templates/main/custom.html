@@ -1,0 +1,94 @@
+<!doctype html>
+{% extends 'main/base.html' %}
+
+
+
+{% block content %}
+
+<style>
+
+    tr:nth-child(even) {
+        background-color: lightgreen;
+    }
+
+    tr:nth-child(odd) {
+        background-color: white;
+    }
+
+
+
+
+</style>
+        
+    <br><br>
+    
+    {% if none == True %}
+    <br><br><br>
+        <h3>You haven't added any employees</h3>
+        <h3>Click<a href="/addemployees"> here </a>to add some</h3>
+    {% else %}
+
+        <table align="center" border="black" width="1200">
+            <tr align="center" style="background-color:lightgrey;">
+                <th width="150" height="50">Name</th>
+                <th width="100" height="50">Role</th>
+                <th width="100" height="50">Monday</th>
+                <th width="100" height="50">Tuesday</th>
+                <th width="100" height="50">Wednesday</th>
+                <th width="100" height="50">Thursday</th>
+                <th width="100" height="50">Friday</th>
+                <th width="100" height="50">Saturday</th>
+                <th width="100" height="50">Sunday</th>
+                <th width="100" height="50">Edit</th>
+            </tr>
+            
+
+                {% for employee in employees %}
+                    
+                    <tr align="center">
+                        <td height="50">{{employee.first_name}} {{employee.last_name}}</td>
+                        <td height="50">{{employee.role}}</td>
+                    {% if company.companyCheck %}
+
+                        <td height="50">{{employee.monday}}</td>
+                        <td height="50">{{employee.tuesday}}</td>
+                        <td height="50">{{employee.wednesday}}</td>
+                        <td height="50">{{employee.thursday}}</td>
+                        <td height="50">{{employee.friday}}</td>
+                        <td height="50">{{employee.saturday}}</td>
+                        <td height="50">{{employee.sunday}}</td>
+                        
+                        <td height="50"><a href="{% url 'editRota' employee.pk %}">Change</a></td>
+                    
+                    {% else %}
+                        <td height="50"></td>
+                        <td height="50"></td>
+                        <td height="50"></td>
+                        <td height="50"></td>
+                        <td height="50"></td>
+                        <td height="50"></td>
+                        <td height="50"></td>
+                        <td height="50"><a href="{% url 'editRota' employee.pk %}">Change</a></td>
+                    {% endif %}
+
+
+                {% endfor %}
+
+    
+    {% endif %}
+
+    
+
+    
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
